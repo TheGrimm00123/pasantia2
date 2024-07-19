@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Horas de Trabajo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #hours-list {
+            margin-top: 20px;
+        }
+
+        .hour-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        #add-hours {
+            display: none;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #add-hours:hover {
+            background-color: #0056b3;
+        }
+
+        #clear-hours {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffc107;
+            color: black;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #clear-hours:hover {
+            background-color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Horas de Trabajo</h1>
+        <form id="work-hours-form">
+            <label for="start-time">Hora de Entrada:</label>
+            <input type="time" id="start-time" required>
+            <label for="end-time">Hora de Salida:</label>
+            <input type="time" id="end-time" required>
+            <button type="submit">Ingresar Horas</button>
+        </form>
+        <div id="result">
+            <h2>Total de Horas Trabajadas: <span id="total-hours">0</span> horas</h2>
+            <div id="hours-list"></div>
+            <button id="add-hours">Sumar Horas al Total</button>
+            <button id="clear-hours">Limpiar Todo</button>
+        </div>
+    </div>
+    <script>
+        let pendingHours = 0;
+
+        document.getElementById('work-hours-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+
+            if (startTime && endTime) {
+                const start = new Date(`1970-01-01T${startTime}:00`);
+                const end = new Date(`1970-01-01T${endTime}:00`);
+                let diff = (end - start) / (1000 * 60 * 60); // Difference in hours
+
+                if (diff < 0) {
+                    diff += 24; // Adjust for times past midnight
+                }
+
+                const hours = Math.floor(diff);
+                const minutes = Math.round((diff - hours) * 60);
+                const hoursWorked = hours + minutes / 60;
+
+                const hourEntry = document.createElement('div');
+                hourEntry.className = 'hour-entry';
+                hourEntry.innerHTML = `Entrada: ${startTime}, Salida: ${endTime} - ${hours} horas y ${minutes} minutos 
+                                       <button class="delete-button">Eliminar</button>`;
+                document.getElementById('hours-list').appendChild(hourEntry);
+
+                hourEntry.querySelector('.delete-button').addEventListener('click', function() {
+                    pendingHours -= hoursWorked;
+                    document.getElementById('hours-list').removeChild(hourEntry);
+                    if (pendingHours === 0) {
+                        document.getElementById('add-hours').style.display = 'none';
+                    }
+                });
+
+                pendingHours += hoursWorked;
+                document.getElementById('add-hours').style.display = 'block';
+            } else {
+                alert('Por favor, introduce ambas horas.');
+            }
+        });
+
+        document.getElementById('add-hours').addEventListener('click', function() {
+            let totalHours = parseFloat(localStorage.getItem('totalHours')) || 0;
+            totalHours += pendingHours;
+            localStorage.setItem('totalHours', totalHours);
+
+            document.getElementById('total-hours').innerText = totalHours.toFixed(2);
+            document.getElementById('hours-list').innerHTML = '';
+            pendingHours = 0;
+            document.getElementById('add-hours').style.display = 'none';
+        });
+
+        document.getElementById('clear-hours').addEventListener('click', function() {
+            localStorage.setItem('totalHours', 0);
+            document.getElementById('total-hours').innerText = '0';
+            document.getElementById('hours-list').innerHTML = '';
+            pendingHours = 0;
+            document.getElementById('add-hours').style.display = 'none';
+        });
+
+        window.addEventListener('load', function() {
+            const totalHours = parseFloat(localStorage.getItem('totalHours')) || 0;
+            document.getElementById('total-hours').innerText = totalHours.toFixed(2);
+        });
+    </script>
+</body>
+</html>
+
