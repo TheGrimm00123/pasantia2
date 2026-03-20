@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Sin titulo</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -133,103 +132,7 @@ cursor:pointer;
 
 <body>
 
-<div style="color: black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; text-align: center; font-size:40px; font-weight:bold;">
-BIBLIOTECA
-</div>
-
-<div class="biblioteca">
-
-<div class="fila">
-<div class="libro rojo" onclick="abrirLibro(1)"><div class="lomo">Presentación</div></div>
-<div class="libro rosa" onclick="abrirLibro(2)"><div class="lomo">Me gustas</div></div>
-<div class="libro morado" onclick="abrirLibro(3)"><div class="lomo">Mis Miedos</div></div>
-<div class="libro vino" onclick="abrirLibro(4)"><div class="lomo">Intenciones</div></div>
-<div class="libro carmesi" onclick="abrirLibro(5)"><div class="lomo">Extensiones</div></div>
-<div class="libro rojo" onclick="abrirLibro(6)"><div class="lomo">Significado</div></div>
-</div>
-
-<div class="estante"></div>
-
-<div class="fila">
-<div class="libro rosa" onclick="abrirLibro(7)"><div class="lomo">Disculpa</div></div>
-<div class="libro morado" onclick="abrirLibro(8)"><div class="lomo">Continuación</div></div>
-<div class="libro vino" onclick="abrirLibro(9)"><div class="lomo">Libro</div></div>
-</div>
-
-<div class="estante"></div>
-
-</div>
-
-<div class="overlay" id="overlay">
-
-<div class="cerrar" onclick="cerrarLibro()">✕</div>
-
-<div class="libro-abierto" id="libro">
-
-<div class="pagina">
-
-<div class="titulo" id="tituloLibro"></div>
-
-<div class="texto" id="texto1"></div>
-
-</div>
-
-<div class="pagina">
-
-<div class="texto" id="texto2"></div>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-const libros = {
-
-1:{titulo:"Presentación",texto1:"Hola! Los siguientes libros contienen textos, palabras y emociones que me gustaria que leyeras",texto2:"Esto sera algo ESPECIAL para ti, asi que espero que lo disfrutes y te guste tanto como a mi me gusto escribirlo y hacerlo para ti."},
-2:{titulo:"ME GUSTAS",texto1:"Recuerdo aquella segunda vez que te `conoci`, la segunda porque la primera vez no lo recuerdo jajaja",texto2:"La verdad te me hiciste muy linda y e de admitir que me gustaste desde el primer momento, pero no se si fue por tu forma de ser o por tu belleza, lo que si se es que me gustaste mucho y me sigues gustando cada vez mas."},
-3:{titulo:"Mis Miedos",texto1:"Tengo inseguridad, miedo a sentir, e pasado mas de 7 años solo y no por gusto, me a ido muy mal en esto del `amor` y la verdad ni yo e encontrado la explicacion de porque soy tan sensible con  ",texto2:"muchas cosas, aveces demasiado o exagerado. sobre pienso mucho, que e buscado muchas veces distracciones para sobre llevar o darle sentido a mi vida."},
-4:{titulo:"Intenciones",texto1:"Mi intencion es quererte, aveces suenan mentirosas y las palabras no siempre tienen valides, pero quiero que seas tù! la mujer que quiero querer el resto de mi vida si es que asi Dios y tu me lo",texto2:"permiten, acompañarte, cuidarte, hacerte feliz, ser tu apoyo, tu amigo, tu compañero, tu todo. Quiero que seamos un equipo y que podamos construir algo hermoso juntos."},
-5:{titulo:"Extensiones",texto1:"Entiendo que tienes una niña, lo cual sinceramente de mi boca a salido que nunca estaria con alguien que tenga hijo y quiero decirtelo para que no te sorprenda.",texto2:"Pero quiero ser tu apoyo, tu compañia , acompañarte en esta etapa de tu vida como madre."},
-6:{titulo:"Significado",texto1:"Nose que tanto signifique para ti o al final no significo nada, pero heme aqui, escribiendo y haciendo una pagina web para la mujer que quiero",texto2:""},
-7:{titulo:"Disculpa",texto1:"Si en caso me e presipitado o al final no sientas nada, queria pedirte disculpas.",texto2:"Me tocaria despedirme de ti, pero no quiero hacerlo, asi que solo me quedaria decirte que te deseo lo mejor y que espero que encuentres a alguien que te quiera tanto como yo te hubiera querido."},
-8:{titulo:"Continuación",texto1:"Te deseo lo mejor del mundo, deseo que te vaya bien tanto en tu vida como en tu trabajo, que sigas luchando, que puedas volver a levantar tu negocio y que sigas creciendo emocional y finacieramente.",texto2:"Espero no incomodar, mi intencion solo fue quererte intensamente, aunque presipitadamente o talvez equiocadamente."},
-9:{titulo:"Libro",texto1:" Espero que puedas entenderlo y que no te moleste, solo queria expresarte lo que siento y lo que me gustaria que fueras para mi.",texto2:"Si es que no tienes nada que decirme o no sientes nada, lo entiendo y lo acepto, solo queria que lo supieras, entiendo perfectamente el silencio."}
-}
-
-function abrirLibro(id){
-
-const libro = libros[id]
-
-document.getElementById("tituloLibro").innerText = libro.titulo
-document.getElementById("texto1").innerText = libro.texto1
-document.getElementById("texto2").innerText = libro.texto2
-
-const overlay=document.getElementById("overlay")
-const libroVista=document.getElementById("libro")
-
-overlay.style.pointerEvents="all"
-overlay.style.opacity="1"
-
-libroVista.style.transform="scale(1)"
-
-}
-
-function cerrarLibro(){
-
-const overlay=document.getElementById("overlay")
-const libro=document.getElementById("libro")
-
-overlay.style.opacity="0"
-overlay.style.pointerEvents="none"
-
-libro.style.transform="scale(.6)"
-
-}
-
-</script>
+Te quiero! 
 
 <footer style="width:100%;text-align:center;padding:20px;color:black;font-family:Georgia,serif;">
 © By @Jhonny A. 14 de marzo de 2026. duration for 1 week
