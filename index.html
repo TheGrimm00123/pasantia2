@@ -1,142 +1,318 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sin titulo</title>
+
+<title>7 Días Pensando en Ti 🌻</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
 
 body{
-background:url("https://www.transparenttextures.com/patterns/wood-pattern.png") repeat center/300px;
-font-family:Georgia,serif;
-margin:0;
-color:white;
+background:#f4f4f4;
+font-family:Georgia, serif;
+text-align:center;
 }
 
-.biblioteca{
-padding:15px;
+h1{
+margin-top:30px;
+color:#4e2c1e;
 }
 
-.fila{
-display:flex;
-justify-content:center;
-gap:6px;
-flex-wrap:wrap;
-margin-bottom:5px;
+/* CONTENEDOR */
+
+.girasol{
+position:relative;
+width:320px;
+height:320px;
+margin:60px auto;
 }
 
-.estante{
-height:10px;
-background:linear-gradient(#8b5a2b,#5a3a1a);
-margin-bottom:25px;
-border-radius:2px;
-box-shadow:0 5px 10px rgba(0,0,0,.6);
-}
+/* PETALOS */
 
-.libro{
-width:50px;
-height:170px;
-border-radius:4px;
-border:2px solid silver;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:.3s;
-}
+.petalo{
 
-.libro:hover{
-transform:scale(1.05);
-}
-
-.lomo{
-writing-mode:vertical-rl;
-transform:rotate(180deg);
-font-size:12px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
-.rojo{background:linear-gradient(#7b1e3a,#b33951)}
-.rosa{background:linear-gradient(#c2185b,#f06292)}
-.morado{background:linear-gradient(#000000,#000000)}
-.vino{background:linear-gradient(#4a001f,#7b1e3a)}
-.carmesi{background:linear-gradient(#8b0000,#d32f2f)}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.75);
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:0;
-pointer-events:none;
-transition:.4s;
-}
-
-.libro-abierto{
-width:420px;
-max-width:95%;
-height:260px;
-display:flex;
-background:#e6d3a3;
-border-radius:10px;
-box-shadow:0 20px 40px rgba(0,0,0,.8);
-transform:scale(.6);
-transition:.5s;
-overflow:hidden;
-}
-
-.pagina{
-flex:1;
-padding:18px;
-background:#f1e3c1;
-border-right:2px solid #c9b384;
-overflow:hidden;
-}
-
-.pagina:last-child{
-border-right:none;
-}
-
-.titulo{
-font-size:18px;
-font-weight:bold;
-margin-bottom:8px;
-color:#5a1a18;
-}
-
-.texto{
-font-size:14px;
-line-height:1.4;
-color: #000000;
-}
-
-.cerrar{
 position:absolute;
-top:20px;
-right:25px;
-font-size:28px;
+
+width:90px;
+height:150px;
+
+left:115px;
+top:-40px;
+
+transform-origin:50% 200px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-weight:bold;
+
+/* forma de pétalo con punta */
+
+clip-path: polygon(
+50% 0%,
+85% 25%,
+100% 70%,
+50% 100%,
+0% 70%,
+15% 25%
+);
+
+}
+
+/* DECORATIVOS ATRAS */
+
+.decorativo{
+
+background:linear-gradient(#ffd54f,#ffb300);
+
+border:1px solid rgba(0,0,0,0.15);
+
+box-shadow:0 3px 6px rgba(0,0,0,0.15);
+
+z-index:1;
+
+}
+
+/* PETALOS ACTIVOS */
+
+.activo{
+
+background:linear-gradient(#fff176,#fbc02d);
+
+border:2px solid #d39e00;
+
 cursor:pointer;
+
+box-shadow:0 6px 12px rgba(0,0,0,0.25);
+
+z-index:2;
+
+transition:0.3s;
+
+}
+
+.activo:hover{
+transform:scale(1.1) rotate(var(--rot));
+}
+
+/* TEXTO */
+
+.petalo span{
+
+transform:rotate(calc(-1 * var(--rot)));
+
+font-size:14px;
+
+}
+
+/* CENTRO DEL GIRASOL */
+
+.centro{
+
+position:absolute;
+
+width:140px;
+height:140px;
+
+background:
+
+radial-gradient(circle,#6d4c41,#3e2723);
+
+border-radius:50%;
+
+top:90px;
+left:90px;
+
+z-index:10; /* delante de todos */
+
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+
+}
+
+/* FOOTER */
+
+footer{
+
+margin-top:80px;
+padding:20px;
+background:#4e2c1e;
+color:white;
+
+}
+
+.modal-body{
+max-height:60vh;
+overflow:auto;
+text-align:left;
 }
 
 </style>
+
 </head>
 
 <body>
 
-Te quiero! 
+<h1>7 Días Pensando en Ti 🌻</h1>
 
-<footer style="width:100%;text-align:center;padding:20px;color:black;font-family:Georgia,serif;">
-© By @Jhonny A. 14 de marzo de 2026. duration for 1 week
+<div class="girasol" id="girasol"></div>
+
+<footer>
+Hecho con ❤️ para alguien especial
 </footer>
+
+
+<!-- MODALES -->
+
+<div class="modal fade" id="dia1">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 1</h5></div>
+<div class="modal-body">
+Día 1
+Normalmente cuando quieres a alguien te cuesta dejarl@ ir a pesar de que quieres una vida con el/la pero no se puede, en esta vida e aprendido qué no todo lo que quiero lo puedo conseguir y una de ellas es el amor, lo único que e aprendido es a dejar ir a aquella persona que quiero, a aquella persona por la que hubiera dado mi vida, alma y corazón por hacerla feliz y en este momento ERES TÚ la persona por la cual muero de amor!. 
+Pero también pienso si estoy equivocado?  
+Y me digo: que más da! Si al final del día te encuentras en tu cuarto solo, mirando el techo y pensando ¿porque no te elijen? Y llegan las preguntas a mi mente</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia2">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 2</h5></div>
+<div class="modal-body">Día 2
+Lamento no poder quedarme y ser tu amigo, te idealize demasiado y me enamore tanto de ti. Que mi castigo será ese, que no salgas de mi cabeza ni días ni noches, pero te juro que haré lo posible para ya no quererte y solo seas un punto más en este basto mundo de personas buenas y malas, asi borrando aquello que nunca fue.</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia3">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 3</h5></div>
+<div class="modal-body">Día 3 
+Quiero ser sincero y decir! Ojalá la vida me hubiera permitido estar con tigo, crear un futuro y una vida a tu lado, acompañarte en buenos y malos momentos, apoyarte en todos tus proyectos y estar para ti, ayudarte en lo que necesites y quererte con la fuerza de mi alma y de todo mi ser, enamorándome de ti cada día, para que el "amor" no solo sea palabras, sino echos.</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia4">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 4</h5></div>
+<div class="modal-body">Día 4
+Lamento no poder ser suficientemente bueno para ti, pero te juro que mejorare y si en algún momento de la vida nos volvamos encontrar este listo para serlo para ti.
+Llámame infantil, talvez si lo sea, no lose. Aveces no tenemos control sobre nuestros echos o simplemente fuimos criados de tal manera que lo vemos "normal" aquellas actitudes, pero cuando quieres a alguien estas dispuesto a muchas cosas, tanto a adaptarte como a mejorar, madurar y ser mejor, quería que tu fueras la niña que me ayude a mejorar, tanto para mi como para ti</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia5">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 5</h5></div>
+<div class="modal-body">Día 5
+Me gustaron mucho tus ojitos y aquella sonrisa que me volvió tonto en solo días y perdidamente enamorado de ella.
+Te quiero y por ende en mi despedida quiero decirte que para mi eres alguien increíble! Para mi eres alguien super especial y aunque no pueda acompañarte en esta vida quiero que sepas que yo si te quiero y de la mejor manera posible que se pueda querer a alguien, estarás en mi corazón hasta el día en que te suelte y deje de querer, hasta que solo recuerde tu nombre y se borre este sentimiento de mi corazón.</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia6">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 6</h5></div>
+<div class="modal-body">
+
+He estado pensando mucho estos días y entendiendo poco a poco que a veces querer mucho a alguien también significa aprender a soltar. No porque uno deje de sentir, sino porque el corazón también necesita paz.
+
+Conocerte fue algo muy bonito para mí. En tan poco tiempo lograste quedarte en mis pensamientos, en mis recuerdos y en muchas de las cosas que sentí. Tal vez para ti fue algo pequeño o pasajero, pero para mí fue algo sincero y real.
+
+Pero también he entendido que cuando los sentimientos no son iguales, seguir cerca puede hacer que el corazón se confunda y siga esperando algo que probablemente nunca llegará. Y vivir esperando algo así termina lastimando más de lo que uno quisiera admitir.
+
+Por eso quiero pedirte algo con mucho respeto y cariño. Tal vez lo mejor para mí en este momento sea que dejemos de hablar. No lo digo con enojo ni con resentimiento, porque no hay nada de eso en mi corazón. Lo digo porque necesito aprender a soltar, a sanar y a encontrar tranquilidad dentro de mí.
+
+A veces la distancia también es una forma de cuidar lo que sentimos. Prefiero quedarme con los recuerdos bonitos de haberte conocido, con tu sonrisa y con la forma en que llegaste a alegrar mis días, antes que convertir todo esto en algo doloroso para mí.
+
+Así que si algún día notas mi silencio, no es porque te guarde rencor ni porque quiera borrarte de mi vida. Es simplemente porque estoy intentando cuidar mi corazón y seguir adelante.
+
+Y aunque tome distancia, quiero que sepas que te deseo lo mejor en tu vida. Que encuentres felicidad, que logres todo lo que te propongas y que siempre recuerdes que hay alguien que, en algún momento, te quiso de verdad.</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="dia7">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header"><h5>Día 7</h5></div>
+<div class="modal-body">Día 7
+Con esto espero que te sientas alguien especial, levantarte el ánimo y no estés triste, con esto quiero que sepas que alguien te quiere y esta dispuesto a todo por ti, que eres increíble! Que eres espectacular y una mujer increíble que lucha por salir adelante.
+La prioridad de esta vida es hacer dinero y lo entiendo, pero quería acompañarte y ser un apoyo para ti.
+Una vez más te digo! Si algún día te sientes insuficiente, recuerda que para mi eras más que suficiente, que para mi eres alguien genial.
+En este último párrafo me despido y te digo Adiós, no porque no te quiera, sino porque yo igual quiero estar bien y tu rechazo me hace daño y me causa inestabilidad emocional y nervios que calmo con cigarros qué quiero dejar y no tener dependencia de ello.
+TE QUIERO con mayúsculas porque mi corazón así te lo quiere expresar.</div>
+</div>
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+const girasol=document.getElementById("girasol");
+
+/* PETALOS DECORATIVOS */
+
+for(let i=0;i<24;i++){
+
+let rot=(360/24*i);
+
+let p=document.createElement("div");
+
+p.classList.add("petalo","decorativo");
+
+p.style.transform="rotate("+rot+"deg)";
+
+girasol.appendChild(p);
+
+}
+
+/* PETALOS INTERACTIVOS */
+
+const posiciones=[0,50,100,150,200,250,300];
+
+posiciones.forEach((rot,i)=>{
+
+let p=document.createElement("div");
+
+p.classList.add("petalo","activo");
+
+p.style.transform="rotate("+rot+"deg)";
+p.style.setProperty('--rot',rot+'deg');
+
+p.innerHTML="<span>Día "+(i+1)+"</span>";
+
+p.setAttribute("data-bs-toggle","modal");
+p.setAttribute("data-bs-target","#dia"+(i+1));
+
+girasol.appendChild(p);
+
+});
+
+/* CENTRO */
+
+let centro=document.createElement("div");
+centro.classList.add("centro");
+
+girasol.appendChild(centro);
+
+</script>
 
 </body>
 </html>
